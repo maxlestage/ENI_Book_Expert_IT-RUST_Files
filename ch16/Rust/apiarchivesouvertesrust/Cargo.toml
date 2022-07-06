@@ -1,0 +1,20 @@
+[package]
+name = "apiarchivesouvertesrust"
+version = "0.1.0"
+edition = "2021"
+description = "Rust library that allow to access Archives ouvertes (HAL)."
+license = "MIT OR Apache-2.0"
+keywords = ["HAL", "archives", "ouvertes"]
+categories = ["api-bindings"]
+readme = "README.md"
+authors = ["Benoît Prieur"]
+repository = "https://github.com/benprieur/apiarchivesouvertesrust"
+homepage = "https://github.com/benprieur/apiarchivesouvertesrust"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = { version = "0.11.9", features = ["blocking"] }
+json = "0.12.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Addition</title>
+    <script>
+     async function addition(a, b){
+        
+        let resultat = 0;
+
+        let reponse = await fetch('/addition_wasm/target/wasm32-unknown-unknown/release/addition_wasm.wasm');
+        let bytes = await reponse.arrayBuffer();
+        let { instance } = await WebAssembly.instantiate(bytes, { });
+
+        resultat = instance.exports.addition(a, b);
+        return await resultat;
+     }
+    </script>
+  </head>
+  <body>
+    <form>
+        <label>Premier entier :</label><br />
+        <input type="text" id="1" name="entier_1" /><br />
+        <label>Second entier :</label><br>
+        <input type="text" id="2" name="entier_2" /><br /><br />
+        <input type="button" value="Addition" onclick="
+              a = parseInt(document.getElementById('1').value);
+              console.log(a);
+              b = parseInt(document.getElementById('2').value);
+              console.log(b);
+
+              addition(a, b).then(res => {
+                console.log(res);
+                document.getElementById('res').innerText = res;
+              })
+              .catch(e => {
+                console.log('On a eu un problème : ' + e.message);
+              });" />
+          <br /><br /> 
+          <b><label>Résultat : </label></b>
+          <label id="res" name="res"></label>
+      </form>
+  </body>
+</html>
